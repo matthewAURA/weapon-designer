@@ -16,7 +16,6 @@ use rapier2d::prelude::{Collider, RigidBody};
 
 pub enum SimulationObjectShape {
     Polygon(Vec<Point<f32>>),
-    Rectangle(f32, f32),
 }
 
 pub struct SimulationObject {
@@ -38,7 +37,7 @@ pub struct InitialSimulationObjects {
 fn get_points_for_collider(collider: &Collider) -> SimulationObjectShape {
     match collider.shape().as_typed_shape() {
         TypedShape::ConvexPolygon(cp) => SimulationObjectShape::Polygon(cp.points().to_vec()),
-        _ => return SimulationObjectShape::Rectangle(10.0, 10.0),
+        _ => return SimulationObjectShape::Polygon(vec![]),
     }
 }
 
